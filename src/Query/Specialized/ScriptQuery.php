@@ -33,7 +33,7 @@ class ScriptQuery implements BuilderInterface
 
     public function toArray(): array
     {
-        $query = ['inline' => $this->script];
+        $query = ['source' => $this->script];
         $output = $this->processArray($query);
 
         return [$this->getType() => ['script' => $output]];

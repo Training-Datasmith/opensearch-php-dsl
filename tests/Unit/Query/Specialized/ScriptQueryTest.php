@@ -45,12 +45,12 @@ class ScriptQueryTest extends \PHPUnit\Framework\TestCase
             'simple_script' => [
                 "doc['num1'].value > 1",
                 [],
-                ['script' => ['inline' => "doc['num1'].value > 1"]],
+                ['script' => ['source' => "doc['num1'].value > 1"]],
             ],
             'script_with_parameters' => [
                 "doc['num1'].value > param1",
                 ['params' => ['param1' => 5]],
-                ['script' => ['inline' => "doc['num1'].value > param1", 'params' => ['param1' => 5]]],
+                ['script' => ['source' => "doc['num1'].value > param1", 'params' => ['param1' => 5]]],
             ],
         ];
     }
