@@ -181,7 +181,7 @@ class Search
      *
      * @return $this
      */
-    public function addQuery(BuilderInterface $query, string $boolType = BoolQuery::MUST, $key = null)
+    public function addQuery(BuilderInterface $query, string $boolType = BoolQuery::MUST, ?string $key = null): static
     {
         $endpoint = $this->getEndpoint(QueryEndpoint::NAME);
         $endpoint->addToBool($query, $boolType, $key);
@@ -222,7 +222,7 @@ class Search
      *
      * @return $this
      */
-    public function addPostFilter(BuilderInterface $filter, $boolType = BoolQuery::MUST, $key = null)
+    public function addPostFilter(BuilderInterface $filter, ?string $boolType = BoolQuery::MUST, ?string $key = null): static
     {
         $this
             ->getEndpoint(PostFilterEndpoint::NAME)
@@ -249,7 +249,7 @@ class Search
      *
      * @return $this
      */
-    public function addAggregation(AbstractAggregation $aggregation, ?string $key = null)
+    public function addAggregation(AbstractAggregation $aggregation, ?string $key = null): static
     {
         $this->getEndpoint(AggregationsEndpoint::NAME)->add($aggregation, $key ?: $aggregation->getName());
 
@@ -261,7 +261,7 @@ class Search
      *
      * @return BuilderInterface[]
      */
-    public function getAggregations()
+    public function getAggregations(): array
     {
         return $this->getEndpoint(AggregationsEndpoint::NAME)->getAll();
     }
@@ -271,7 +271,7 @@ class Search
      *
      * @return $this
      */
-    public function addInnerHit(NestedInnerHit $innerHit, ?string $key = null)
+    public function addInnerHit(NestedInnerHit $innerHit, ?string $key = null): static
     {
         $this->getEndpoint(InnerHitsEndpoint::NAME)->add($innerHit, $key ?: $innerHit->getName());
 
@@ -283,7 +283,7 @@ class Search
      *
      * @return BuilderInterface[]
      */
-    public function getInnerHits()
+    public function getInnerHits(): array
     {
         return $this->getEndpoint(InnerHitsEndpoint::NAME)->getAll();
     }
@@ -293,7 +293,7 @@ class Search
      *
      * @return $this
      */
-    public function addSort(BuilderInterface $sort, ?string $key = null)
+    public function addSort(BuilderInterface $sort, ?string $key = null): static
     {
         $this->getEndpoint(SortEndpoint::NAME)->add($sort, $key);
 
@@ -305,7 +305,7 @@ class Search
      *
      * @return BuilderInterface[]
      */
-    public function getSorts()
+    public function getSorts(): array
     {
         return $this->getEndpoint(SortEndpoint::NAME)->getAll();
     }
@@ -317,7 +317,7 @@ class Search
      *
      * @return $this
      */
-    public function addHighlight($highlight)
+    public function addHighlight(\OpenSearchDSL\BuilderInterface $highlight): static
     {
         $this->getEndpoint(HighlightEndpoint::NAME)->add($highlight);
 
@@ -326,10 +326,8 @@ class Search
 
     /**
      * Returns highlight builder.
-     *
-     * @return BuilderInterface
      */
-    public function getHighlights()
+    public function getHighlights(): \OpenSearchDSL\BuilderInterface
     {
         /** @var HighlightEndpoint $highlightEndpoint */
         $highlightEndpoint = $this->getEndpoint(HighlightEndpoint::NAME);
@@ -342,7 +340,7 @@ class Search
      *
      * @return $this
      */
-    public function addSuggest(NamedBuilderInterface $suggest, ?string $key = null)
+    public function addSuggest(NamedBuilderInterface $suggest, ?string $key = null): static
     {
         $this->getEndpoint(SuggestEndpoint::NAME)->add($suggest, $key ?: $suggest->getName());
 
@@ -354,25 +352,20 @@ class Search
      *
      * @return BuilderInterface[]
      */
-    public function getSuggests()
+    public function getSuggests(): array
     {
         return $this->getEndpoint(SuggestEndpoint::NAME)->getAll();
     }
 
-    /**
-     * @return int|null
-     */
-    public function getFrom()
+    public function getFrom(): ?int
     {
         return $this->from;
     }
 
     /**
-     * @param int|null $from
-     *
      * @return $this
      */
-    public function setFrom($from)
+    public function setFrom(?int $from): static
     {
         $this->from = $from;
 
@@ -392,37 +385,29 @@ class Search
      *
      * @return $this
      */
-    public function setTrackTotalHits($trackTotalHits)
+    public function setTrackTotalHits($trackTotalHits): static
     {
         $this->trackTotalHits = $trackTotalHits;
 
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getSize()
+    public function getSize(): ?int
     {
         return $this->size;
     }
 
     /**
-     * @param int|null $size
-     *
      * @return $this
      */
-    public function setSize($size)
+    public function setSize(?int $size): static
     {
         $this->size = $size;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isSource()
+    public function isSource(): bool
     {
         return $this->source !== false && $this->source !== '';
     }
@@ -440,7 +425,7 @@ class Search
      *
      * @return $this
      */
-    public function setSource($source)
+    public function setSource($source): static
     {
         $this->source = $source;
 
@@ -450,7 +435,7 @@ class Search
     /**
      * @return array
      */
-    public function getStoredFields()
+    public function getStoredFields(): ?array
     {
         return $this->storedFields;
     }
@@ -460,7 +445,7 @@ class Search
      *
      * @return $this
      */
-    public function setStoredFields($storedFields)
+    public function setStoredFields(?array $storedFields): static
     {
         $this->storedFields = $storedFields;
 
@@ -470,7 +455,7 @@ class Search
     /**
      * @return array
      */
-    public function getScriptFields()
+    public function getScriptFields(): ?array
     {
         return $this->scriptFields;
     }
@@ -480,7 +465,7 @@ class Search
      *
      * @return $this
      */
-    public function setScriptFields($scriptFields)
+    public function setScriptFields(?array $scriptFields): static
     {
         $this->scriptFields = $scriptFields;
 
@@ -490,7 +475,7 @@ class Search
     /**
      * @return array
      */
-    public function getDocValueFields()
+    public function getDocValueFields(): ?array
     {
         return $this->docValueFields;
     }
@@ -500,7 +485,7 @@ class Search
      *
      * @return $this
      */
-    public function setDocValueFields($docValueFields)
+    public function setDocValueFields(?array $docValueFields): static
     {
         $this->docValueFields = $docValueFields;
 
@@ -510,7 +495,7 @@ class Search
     /**
      * @return bool
      */
-    public function isExplain()
+    public function isExplain(): ?bool
     {
         return $this->explain;
     }
@@ -520,7 +505,7 @@ class Search
      *
      * @return $this
      */
-    public function setExplain($explain)
+    public function setExplain(?bool $explain): static
     {
         $this->explain = $explain;
 
@@ -530,7 +515,7 @@ class Search
     /**
      * @return bool
      */
-    public function isVersion()
+    public function isVersion(): ?bool
     {
         return $this->version;
     }
@@ -540,7 +525,7 @@ class Search
      *
      * @return $this
      */
-    public function setVersion($version)
+    public function setVersion(?bool $version): static
     {
         $this->version = $version;
 
@@ -550,7 +535,7 @@ class Search
     /**
      * @return array
      */
-    public function getIndicesBoost()
+    public function getIndicesBoost(): ?array
     {
         return $this->indicesBoost;
     }
@@ -560,7 +545,7 @@ class Search
      *
      * @return $this
      */
-    public function setIndicesBoost($indicesBoost)
+    public function setIndicesBoost(?array $indicesBoost): static
     {
         $this->indicesBoost = $indicesBoost;
 
@@ -570,7 +555,7 @@ class Search
     /**
      * @return float
      */
-    public function getMinScore()
+    public function getMinScore(): ?float
     {
         return $this->minScore;
     }
@@ -580,7 +565,7 @@ class Search
      *
      * @return $this
      */
-    public function setMinScore($minScore)
+    public function setMinScore($minScore): static
     {
         $this->minScore = (float) $minScore;
 
@@ -590,7 +575,7 @@ class Search
     /**
      * @return array
      */
-    public function getSearchAfter()
+    public function getSearchAfter(): ?array
     {
         return $this->searchAfter;
     }
@@ -600,7 +585,7 @@ class Search
      *
      * @return $this
      */
-    public function setSearchAfter($searchAfter)
+    public function setSearchAfter(?array $searchAfter): static
     {
         $this->searchAfter = $searchAfter;
 
@@ -610,7 +595,7 @@ class Search
     /**
      * @return string
      */
-    public function getScroll()
+    public function getScroll(): ?string
     {
         return $this->scroll;
     }
@@ -620,7 +605,7 @@ class Search
      *
      * @return $this
      */
-    public function setScroll($scroll = '5m')
+    public function setScroll(?string $scroll = '5m'): static
     {
         $this->scroll = $scroll;
 
@@ -635,7 +620,7 @@ class Search
      *
      * @return $this
      */
-    public function addUriParam($name, $value)
+    public function addUriParam($name, string $value): static
     {
         if (in_array($name, [
             'q',
@@ -673,10 +658,8 @@ class Search
 
     /**
      * Returns query url parameters.
-     *
-     * @return array
      */
-    public function getUriParams()
+    public function getUriParams(): array
     {
         return $this->uriParams;
     }

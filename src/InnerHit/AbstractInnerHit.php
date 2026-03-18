@@ -62,15 +62,10 @@ abstract class AbstractInnerHit implements NamedBuilderInterface
     {
         $type = null;
 
-        switch ($this->getType()) {
-            case NestedInnerHit::TYPE:
-                $type = 'path';
-                break;
-            case ParentInnerHit::TYPE:
-                $type = 'type';
-                break;
-        }
-
-        return $type;
+        return match ($this->getType()) {
+            NestedInnerHit::TYPE => 'path',
+            ParentInnerHit::TYPE => 'type',
+            default => $type,
+        };
     }
 }

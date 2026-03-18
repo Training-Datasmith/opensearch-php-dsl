@@ -26,21 +26,12 @@ class FieldSort implements BuilderInterface
     public const ASC = 'asc';
     public const DESC = 'desc';
 
-    private string $field;
-
-    private ?string $order;
-
-    private ?BuilderInterface $nestedFilter;
-
     public function __construct(
-        string $field,
-        ?string $order = null,
-        ?BuilderInterface $nestedFilter = null,
+        private string $field,
+        private ?string $order = null,
+        private ?BuilderInterface $nestedFilter = null,
         array $parameters = [],
     ) {
-        $this->field = $field;
-        $this->order = $order;
-        $this->nestedFilter = $nestedFilter;
         $this->setParameters($parameters);
     }
 

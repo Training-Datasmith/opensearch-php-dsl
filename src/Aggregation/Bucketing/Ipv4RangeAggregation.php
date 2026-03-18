@@ -25,7 +25,7 @@ class Ipv4RangeAggregation extends AbstractAggregation
 
     private array $ranges = [];
 
-    public function __construct($name, string $field, array $ranges = [])
+    public function __construct(string $name, string $field, array $ranges = [])
     {
         parent::__construct($name);
 
@@ -51,7 +51,7 @@ class Ipv4RangeAggregation extends AbstractAggregation
                 'from' => $from,
                 'to' => $to,
             ],
-            static fn ($v) => null !== $v
+            static fn (?string $v): bool => null !== $v
         );
 
         $this->ranges[] = $range;

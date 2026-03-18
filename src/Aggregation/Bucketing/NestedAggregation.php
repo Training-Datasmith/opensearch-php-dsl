@@ -25,7 +25,7 @@ class NestedAggregation extends AbstractAggregation
 
     private string $path;
 
-    public function __construct($name, string $path)
+    public function __construct(string $name, string $path)
     {
         parent::__construct($name);
 

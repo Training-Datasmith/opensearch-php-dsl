@@ -23,14 +23,8 @@ class RegexpQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    private string $field;
-
-    private string $regexpValue;
-
-    public function __construct($field, $regexpValue, array $parameters = [])
+    public function __construct(private string $field, private string $regexpValue, array $parameters = [])
     {
-        $this->field = $field;
-        $this->regexpValue = $regexpValue;
         $this->setParameters($parameters);
     }
 

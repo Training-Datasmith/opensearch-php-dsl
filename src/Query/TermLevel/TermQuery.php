@@ -23,17 +23,11 @@ class TermQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    private string $field;
-
-    private $value;
-
     /**
      * @param string|int|float|bool $value
      */
-    public function __construct(string $field, $value, array $parameters = [])
+    public function __construct(private string $field, private $value, array $parameters = [])
     {
-        $this->field = $field;
-        $this->value = $value;
         $this->setParameters($parameters);
     }
 

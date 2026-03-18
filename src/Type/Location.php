@@ -7,14 +7,8 @@ namespace OpenSearchDSL\Type;
  */
 class Location implements TypeInterface
 {
-    private float $lat;
-
-    private float $lon;
-
-    public function __construct(float $lat, float $lon)
+    public function __construct(private float $lat, private float $lon)
     {
-        $this->lat = $lat;
-        $this->lon = $lon;
     }
 
     public function getLat(): float

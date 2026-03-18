@@ -23,14 +23,8 @@ class GeoBoundingBoxQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    private array $values;
-
-    private string $field;
-
-    public function __construct(string $field, array $values, array $parameters = [])
+    public function __construct(private string $field, private array $values, array $parameters = [])
     {
-        $this->field = $field;
-        $this->values = $values;
         $this->setParameters($parameters);
     }
 

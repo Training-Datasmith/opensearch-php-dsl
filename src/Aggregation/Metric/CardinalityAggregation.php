@@ -29,7 +29,7 @@ class CardinalityAggregation extends AbstractAggregation
 
     private ?bool $rehash = null;
 
-    public function getArray()
+    public function getArray(): array
     {
         return \array_filter(
             [
@@ -38,7 +38,7 @@ class CardinalityAggregation extends AbstractAggregation
                 'precision_threshold' => $this->getPrecisionThreshold(),
                 'rehash' => $this->isRehash(),
             ],
-            static fn ($val) => $val || \is_bool($val)
+            static fn (string|int|bool|array|null $val): bool => $val || \is_bool($val)
         );
     }
 

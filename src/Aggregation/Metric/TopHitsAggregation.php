@@ -89,7 +89,7 @@ class TopHitsAggregation extends AbstractAggregation
         return $this->size;
     }
 
-    public function getArray()
+    public function getArray(): array
     {
         $sortsOutput = null;
         $addedSorts = $this->getSorts();
@@ -102,16 +102,14 @@ class TopHitsAggregation extends AbstractAggregation
             }
         }
 
-        $output = \array_filter(
+        return \array_filter(
             [
                 'sort' => $sortsOutput,
                 'size' => $this->getSize(),
                 'from' => $this->getFrom(),
             ],
-            static fn ($val) => \is_array($val) || ($val || \is_numeric($val))
+            static fn ($val): bool => \is_array($val) || ($val || \is_numeric($val))
         );
-
-        return $output;
     }
 
     public function getType(): string

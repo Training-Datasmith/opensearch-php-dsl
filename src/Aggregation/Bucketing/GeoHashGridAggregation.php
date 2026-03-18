@@ -29,7 +29,7 @@ class GeoHashGridAggregation extends AbstractAggregation
 
     private ?int $shardSize;
 
-    public function __construct($name, string $field, ?int $precision = null, ?int $size = null, ?int $shardSize = null)
+    public function __construct(string $name, string $field, ?int $precision = null, ?int $size = null, ?int $shardSize = null)
     {
         parent::__construct($name);
 

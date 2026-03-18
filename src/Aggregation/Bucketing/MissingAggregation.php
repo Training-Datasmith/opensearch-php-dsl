@@ -30,7 +30,7 @@ class MissingAggregation extends AbstractAggregation
         $this->setField($field);
     }
 
-    public function getArray()
+    public function getArray(): array
     {
         return ['field' => $this->getField()];
     }

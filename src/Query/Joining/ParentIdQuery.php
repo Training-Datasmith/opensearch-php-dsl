@@ -12,14 +12,8 @@ class ParentIdQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    private string $childType;
-
-    private string $parentId;
-
-    public function __construct(string $parentId, string $childType, array $parameters = [])
+    public function __construct(private string $parentId, private string $childType, array $parameters = [])
     {
-        $this->childType = $childType;
-        $this->parentId = $parentId;
         $this->setParameters($parameters);
     }
 

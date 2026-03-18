@@ -23,21 +23,12 @@ class NestedSort implements BuilderInterface
 {
     use ParametersTrait;
 
-    private string $path;
-
-    private ?BuilderInterface $filter;
-
-    private ?BuilderInterface $nestedFilter;
-
     public function __construct(
-        string $path,
-        ?BuilderInterface $filter = null,
-        ?BuilderInterface $nestedFilter = null,
+        private string $path,
+        private ?BuilderInterface $filter = null,
+        private ?BuilderInterface $nestedFilter = null,
         array $parameters = [],
     ) {
-        $this->path = $path;
-        $this->filter = $filter;
-        $this->nestedFilter = $nestedFilter;
         $this->setParameters($parameters);
     }
 

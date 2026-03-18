@@ -42,12 +42,12 @@ class OrderedSerializer
     {
         $filteredData = array_filter(
             $data,
-            static fn ($value) => $value instanceof AbstractSearchEndpoint
+            static fn ($value): bool => $value instanceof AbstractSearchEndpoint
         );
 
         uasort(
             $filteredData,
-            static fn (AbstractSearchEndpoint $a, AbstractSearchEndpoint $b) => $a->getOrder() <=> $b->getOrder()
+            static fn (AbstractSearchEndpoint $a, AbstractSearchEndpoint $b): int => $a->getOrder() <=> $b->getOrder()
         );
 
         return array_merge($filteredData, array_diff_key($data, $filteredData));

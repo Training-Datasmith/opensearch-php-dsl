@@ -37,14 +37,14 @@ class ChildrenAggregation extends AbstractAggregation
         return $this->children;
     }
 
-    public function setChildren($children): self
+    public function setChildren(string $children): self
     {
         $this->children = $children;
 
         return $this;
     }
 
-    public function getArray()
+    public function getArray(): array
     {
         if (count($this->getAggregations()) === 0) {
             throw new \LogicException("Children aggregation `{$this->getName()}` has no aggregations added");

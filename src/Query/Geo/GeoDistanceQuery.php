@@ -24,18 +24,8 @@ class GeoDistanceQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    private string $field;
-
-    private string $distance;
-
-    private Location $location;
-
-    public function __construct(string $field, string $distance, Location $location, array $parameters = [])
+    public function __construct(private string $field, private string $distance, private Location $location, array $parameters = [])
     {
-        $this->field = $field;
-        $this->distance = $distance;
-        $this->location = $location;
-
         $this->setParameters($parameters);
     }
 

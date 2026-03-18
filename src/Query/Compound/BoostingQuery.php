@@ -20,17 +20,8 @@ use OpenSearchDSL\BuilderInterface;
  */
 class BoostingQuery implements BuilderInterface
 {
-    private BuilderInterface $positive;
-
-    private BuilderInterface $negative;
-
-    private float $negativeBoost;
-
-    public function __construct(BuilderInterface $positive, BuilderInterface $negative, float $negativeBoost)
+    public function __construct(private BuilderInterface $positive, private BuilderInterface $negative, private float $negativeBoost)
     {
-        $this->positive = $positive;
-        $this->negative = $negative;
-        $this->negativeBoost = $negativeBoost;
     }
 
     public function toArray(): array

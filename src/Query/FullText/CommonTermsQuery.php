@@ -23,14 +23,8 @@ class CommonTermsQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    private string $field;
-
-    private string $query;
-
-    public function __construct(string $field, string $query, array $parameters = [])
+    public function __construct(private string $field, private string $query, array $parameters = [])
     {
-        $this->field = $field;
-        $this->query = $query;
         $this->setParameters($parameters);
     }
 

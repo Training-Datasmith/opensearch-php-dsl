@@ -18,11 +18,8 @@ namespace OpenSearchDSL\Query\Span;
  */
 class SpanNearQuery extends SpanOrQuery implements SpanQueryInterface
 {
-    private ?int $slop;
-
-    public function __construct(?int $slop = null, array $queries = [], array $parameters = [])
+    public function __construct(private ?int $slop = null, array $queries = [], array $parameters = [])
     {
-        $this->slop = $slop;
         parent::__construct($queries, $parameters);
     }
 

@@ -78,7 +78,7 @@ class DateRangeAggregation extends AbstractAggregation
                 'to' => $to,
                 'key' => $key,
             ],
-            static fn ($v) => null !== $v
+            static fn (?string $v): bool => null !== $v
         );
 
         if (empty($range)) {
@@ -90,7 +90,7 @@ class DateRangeAggregation extends AbstractAggregation
         return $this;
     }
 
-    public function getArray()
+    public function getArray(): array
     {
         if (empty($this->ranges)) {
             throw new \LogicException('Date range aggregation must have field and range added.');

@@ -29,20 +29,11 @@ class MultiMatchQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    private array $fields = [];
-
-    /**
-     * @var string|int|float
-     */
-    private $query;
-
     /**
      * @param string|int|float $query
      */
-    public function __construct(array $fields, $query, array $parameters = [])
+    public function __construct(private array $fields, private $query, array $parameters = [])
     {
-        $this->fields = $fields;
-        $this->query = $query;
         $this->setParameters($parameters);
     }
 

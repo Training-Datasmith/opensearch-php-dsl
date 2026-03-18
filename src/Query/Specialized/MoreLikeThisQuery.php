@@ -23,11 +23,8 @@ class MoreLikeThisQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    private string $like;
-
-    public function __construct(string $like, array $parameters = [])
+    public function __construct(private string $like, array $parameters = [])
     {
-        $this->like = $like;
         $this->setParameters($parameters);
     }
 

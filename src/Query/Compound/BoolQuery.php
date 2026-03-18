@@ -36,7 +36,7 @@ class BoolQuery implements BuilderInterface
         foreach ($container as $type => $queries) {
             $queries = is_array($queries) ? $queries : [$queries];
 
-            array_walk($queries, function ($query) use ($type): void {
+            array_walk($queries, function (\OpenSearchDSL\BuilderInterface $query) use ($type): void {
                 $this->add($query, $type);
             });
         }
@@ -54,11 +54,7 @@ class BoolQuery implements BuilderInterface
             return $queries;
         }
 
-        if (isset($this->container[$boolType])) {
-            return $this->container[$boolType];
-        }
-
-        return [];
+        return $this->container[$boolType] ?? [];
     }
 
     public function add(BuilderInterface $query, string $type = self::MUST, ?string $key = null): string

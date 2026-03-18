@@ -23,11 +23,8 @@ class SimpleQueryStringQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    private string $query;
-
-    public function __construct(string $query, array $parameters = [])
+    public function __construct(private string $query, array $parameters = [])
     {
-        $this->query = $query;
         $this->setParameters($parameters);
     }
 

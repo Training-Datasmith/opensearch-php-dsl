@@ -57,7 +57,7 @@ class RangeAggregation extends AbstractAggregation
                 'from' => $from,
                 'to' => $to,
             ],
-            static fn ($v) => null !== $v
+            static fn (?float $v): bool => null !== $v
         );
 
         if ($key) {

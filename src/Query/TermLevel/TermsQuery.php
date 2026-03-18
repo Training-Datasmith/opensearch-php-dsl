@@ -23,14 +23,8 @@ class TermsQuery implements BuilderInterface
 {
     use ParametersTrait;
 
-    private string $field;
-
-    private array $terms;
-
-    public function __construct(string $field, array $terms, array $parameters = [])
+    public function __construct(private string $field, private array $terms, array $parameters = [])
     {
-        $this->field = $field;
-        $this->terms = $terms;
         $this->setParameters($parameters);
     }
 

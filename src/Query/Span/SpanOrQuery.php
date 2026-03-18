@@ -22,11 +22,8 @@ class SpanOrQuery implements SpanQueryInterface
 {
     use ParametersTrait;
 
-    private array $queries;
-
-    public function __construct(array $queries, array $parameters = [])
+    public function __construct(private array $queries, array $parameters = [])
     {
-        $this->queries = $queries;
         $this->setParameters($parameters);
     }
 

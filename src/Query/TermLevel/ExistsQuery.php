@@ -20,11 +20,8 @@ use OpenSearchDSL\BuilderInterface;
  */
 class ExistsQuery implements BuilderInterface
 {
-    private string $field;
-
-    public function __construct(string $field)
+    public function __construct(private string $field)
     {
-        $this->field = $field;
     }
 
     public function toArray(): array

@@ -22,14 +22,8 @@ class SpanNotQuery implements SpanQueryInterface
 {
     use ParametersTrait;
 
-    private SpanQueryInterface $include;
-
-    private SpanQueryInterface $exclude;
-
-    public function __construct(SpanQueryInterface $include, SpanQueryInterface $exclude, array $parameters = [])
+    public function __construct(private SpanQueryInterface $include, private SpanQueryInterface $exclude, array $parameters = [])
     {
-        $this->include = $include;
-        $this->exclude = $exclude;
         $this->setParameters($parameters);
     }
 

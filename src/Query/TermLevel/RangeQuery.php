@@ -31,9 +31,7 @@ class RangeQuery implements BuilderInterface
     public const LTE = 'lte';
     public const GTE = 'gte';
 
-    private string $field;
-
-    public function __construct(string $field, array $parameters = [])
+    public function __construct(private string $field, array $parameters = [])
     {
         $this->setParameters($parameters);
 
@@ -44,8 +42,6 @@ class RangeQuery implements BuilderInterface
         if ($this->hasParameter(self::LTE) && $this->hasParameter(self::LT)) {
             throw new \LogicException('Range query cannot have "lte" and "lt" parameters');
         }
-
-        $this->field = $field;
     }
 
     public function toArray(): array
