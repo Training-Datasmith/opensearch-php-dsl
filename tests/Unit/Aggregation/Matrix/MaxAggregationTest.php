@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OpenSearchDSL\Tests\Unit\Aggregation\Matrix;
 
 use OpenSearchDSL\Aggregation\Matrix\MaxAggregation;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OpenSearchDSL\Tests\Unit\Aggregation\Metric;
 
 use OpenSearchDSL\Aggregation\Metric\ScriptedMetricAggregation;

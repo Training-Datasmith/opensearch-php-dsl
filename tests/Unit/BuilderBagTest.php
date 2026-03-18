@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  * This file is part of the ONGR package.
@@ -111,7 +113,7 @@ class BuilderBagTest extends \PHPUnit\Framework\TestCase
     public function testAddWithoutName(): void
     {
         $bag = new BuilderBag();
-        $bag->add(new class implements BuilderInterface {
+        $bag->add(new class () implements BuilderInterface {
             public function toArray(): array
             {
                 return [];
