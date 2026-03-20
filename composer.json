@@ -29,12 +29,12 @@
     },
     "autoload": {
         "psr-4": {
-            "OpenSearchDSL\\": "src/"
+            "Open_Search_DSL\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "OpenSearchDSL\\Tests\\": "tests/"
+            "Open_Search_DSL\\Tests\\": "tests/"
         }
     },
     "scripts": {
