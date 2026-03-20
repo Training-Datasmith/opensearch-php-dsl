@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,17 +9,16 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace OpenSearchDSL\Aggregation\Bucketing;
+namespace Open_Search_Dsl\Aggregation\Bucketing;
 
 /**
  * Class representing TermsAggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html
  */
-class SignificantTermsAggregation extends TermsAggregation
+class Significant_Terms_Aggregation extends Terms_Aggregation
 {
-    public function getType(): string
+    public function get_type(): string
     {
         return 'significant_terms';
     }

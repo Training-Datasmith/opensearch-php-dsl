@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,76 +9,55 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Suggest;
 
-namespace OpenSearchDSL\Suggest;
-
-use OpenSearchDSL\NameAwareTrait;
-use OpenSearchDSL\NamedBuilderInterface;
-use OpenSearchDSL\ParametersTrait;
-
-class Suggest implements NamedBuilderInterface
+use Open_Search_Dsl\Name_Aware_Trait;
+use Open_Search_Dsl\Named_Builder_Interface;
+use Open_Search_Dsl\Parameters_Trait;
+class Suggest implements Named_Builder_Interface
 {
-    use NameAwareTrait;
-    use ParametersTrait;
-
+    use Name_Aware_Trait;
+    use Parameters_Trait;
     private string $type;
-
     private string $text;
-
     private string $field;
-
     public function __construct(string $name, string $type, string $text, string $field, array $parameters = [])
     {
-        $this->setName($name);
-        $this->setType($type);
-        $this->setText($text);
-        $this->setField($field);
-        $this->setParameters($parameters);
+        $this->set_name($name);
+        $this->set_type($type);
+        $this->set_text($text);
+        $this->set_field($field);
+        $this->set_parameters($parameters);
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return $this->type;
     }
-
-    public function setType(string $type): self
+    public function set_type(string $type): self
     {
         $this->type = $type;
-
         return $this;
     }
-
-    public function getText(): string
+    public function get_text(): string
     {
         return $this->text;
     }
-
-    public function setText(string $text): self
+    public function set_text(string $text): self
     {
         $this->text = $text;
-
         return $this;
     }
-
-    public function getField(): string
+    public function get_field(): string
     {
         return $this->field;
     }
-
-    public function setField(string $field): self
+    public function set_field(string $field): self
     {
         $this->field = $field;
-
         return $this;
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
-        return [
-            $this->getName() => [
-                'text' => $this->getText(),
-                $this->getType() => $this->processArray(['field' => $this->getField()]),
-            ],
-        ];
+        return [$this->get_name() => ['text' => $this->get_text(), $this->get_type() => $this->process_array(['field' => $this->get_field()])]];
     }
 }

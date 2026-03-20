@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,62 +9,45 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Aggregation\Metric;
 
-namespace OpenSearchDSL\Aggregation\Metric;
-
-use OpenSearchDSL\Aggregation\AbstractAggregation;
-use OpenSearchDSL\Aggregation\Type\MetricTrait;
-use OpenSearchDSL\ScriptAwareTrait;
-
+use Open_Search_Dsl\Aggregation\Abstract_Aggregation;
+use Open_Search_Dsl\Aggregation\Type\Metric_Trait;
+use Open_Search_Dsl\Script_Aware_Trait;
 /**
  * Class representing Extended stats aggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-extendedstats-aggregation.html
  */
-class ExtendedStatsAggregation extends AbstractAggregation
+class Extended_Stats_Aggregation extends Abstract_Aggregation
 {
-    use MetricTrait;
-    use ScriptAwareTrait;
-
+    use Metric_Trait;
+    use Script_Aware_Trait;
     /**
      * @param string|array{id: string, params?: array<string, mixed>}|null $script
      */
     public function __construct(string $name, ?string $field = null, ?int $sigma = null, $script = null)
     {
         parent::__construct($name);
-
-        $this->setField($field);
-        $this->setSigma($sigma);
-        $this->setScript($script);
+        $this->set_field($field);
+        $this->set_sigma($sigma);
+        $this->set_script($script);
     }
-
     private ?int $sigma;
-
-    public function getSigma(): ?int
+    public function get_sigma(): ?int
     {
         return $this->sigma;
     }
-
-    public function setSigma(?int $sigma): self
+    public function set_sigma(?int $sigma): self
     {
         $this->sigma = $sigma;
-
         return $this;
     }
-
-    public function getArray(): array
+    public function get_array(): array
     {
-        return \array_filter(
-            [
-                'field' => $this->getField(),
-                'script' => $this->getScript(),
-                'sigma' => $this->getSigma(),
-            ],
-            static fn (string|int|array|null $val): bool => $val || \is_numeric($val)
-        );
+        return \array_filter(['field' => $this->get_field(), 'script' => $this->get_script(), 'sigma' => $this->get_sigma()], static fn(string|int|array|null $val): bool => $val || \is_numeric($val));
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'extended_stats';
     }

@@ -1,72 +1,53 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Open_Search_Dsl\Inner_Hit;
 
-namespace OpenSearchDSL\InnerHit;
-
-use OpenSearchDSL\NameAwareTrait;
-use OpenSearchDSL\NamedBuilderInterface;
-use OpenSearchDSL\ParametersTrait;
-use OpenSearchDSL\Search;
-
-abstract class AbstractInnerHit implements NamedBuilderInterface
+use Open_Search_Dsl\Name_Aware_Trait;
+use Open_Search_Dsl\Named_Builder_Interface;
+use Open_Search_Dsl\Parameters_Trait;
+use Open_Search_Dsl\Search;
+abstract class Abstract_Inner_Hit implements Named_Builder_Interface
 {
-    use NameAwareTrait;
-    use ParametersTrait;
-
+    use Name_Aware_Trait;
+    use Parameters_Trait;
     private string $path;
-
     private ?Search $search;
-
     public function __construct(string $name, string $path, ?Search $search = null)
     {
-        $this->setName($name);
-        $this->setPath($path);
-        $this->setSearch($search);
+        $this->set_name($name);
+        $this->set_path($path);
+        $this->set_search($search);
     }
-
-    public function getPath(): string
+    public function get_path(): string
     {
         return $this->path;
     }
-
-    public function setPath(string $path): self
+    public function set_path(string $path): self
     {
         $this->path = $path;
-
         return $this;
     }
-
-    public function getSearch(): ?Search
+    public function get_search(): ?Search
     {
         return $this->search;
     }
-
-    public function setSearch(?Search $search): self
+    public function set_search(?Search $search): self
     {
         $this->search = $search;
-
         return $this;
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
-        $out = $this->getSearch() ? $this->getSearch()->toArray() : new \stdClass();
-
-        return [
-            $this->getPathType() => [
-                $this->getPath() => $out,
-            ],
-        ];
+        $out = $this->get_search() ? $this->get_search()->to_array() : new \stdClass();
+        return [$this->get_path_type() => [$this->get_path() => $out]];
     }
-
-    private function getPathType(): ?string
+    private function get_path_type(): ?string
     {
         $type = null;
-
-        return match ($this->getType()) {
-            NestedInnerHit::TYPE => 'path',
-            ParentInnerHit::TYPE => 'type',
+        return match ($this->get_type()) {
+            Nested_Inner_Hit::TYPE => 'path',
+            Parent_Inner_Hit::TYPE => 'type',
             default => $type,
         };
     }

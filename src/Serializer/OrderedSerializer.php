@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,48 +9,32 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Serializer;
 
-namespace OpenSearchDSL\Serializer;
-
-use OpenSearchDSL\SearchEndpoint\AbstractSearchEndpoint;
-
-class OrderedSerializer
+use Open_Search_Dsl\Search_Endpoint\Abstract_Search_Endpoint;
+class Ordered_Serializer
 {
     public function normalize($data)
     {
         $data = is_array($data) ? $this->order($data) : $data;
-
         if (is_iterable($data)) {
             foreach ($data as $key => $value) {
-                if ($value instanceof AbstractSearchEndpoint) {
+                if ($value instanceof Abstract_Search_Endpoint) {
                     $normalize = $value->normalize();
-
                     if ($normalize === null || count($normalize) === 0) {
                         unset($data[$key]);
-
                         continue;
                     }
-
                     $data[$key] = $normalize;
                 }
             }
         }
-
         return $data;
     }
-
     private function order(array $data): array
     {
-        $filteredData = array_filter(
-            $data,
-            static fn ($value): bool => $value instanceof AbstractSearchEndpoint
-        );
-
-        uasort(
-            $filteredData,
-            static fn (AbstractSearchEndpoint $a, AbstractSearchEndpoint $b): int => $a->getOrder() <=> $b->getOrder()
-        );
-
-        return array_merge($filteredData, array_diff_key($data, $filteredData));
+        $filtered_data = array_filter($data, static fn($value): bool => $value instanceof Abstract_Search_Endpoint);
+        uasort($filtered_data, static fn(Abstract_Search_Endpoint $a, Abstract_Search_Endpoint $b): int => $a->get_order() <=> $b->get_order());
+        return array_merge($filtered_data, array_diff_key($data, $filtered_data));
     }
 }

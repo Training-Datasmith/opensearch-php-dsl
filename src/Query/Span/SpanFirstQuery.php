@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,36 +9,30 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Span;
 
-namespace OpenSearchDSL\Query\Span;
-
-use OpenSearchDSL\ParametersTrait;
-
+use Open_Search_Dsl\Parameters_Trait;
 /**
  * Elasticsearch span first query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
  */
-class SpanFirstQuery implements SpanQueryInterface
+class Span_First_Query implements Span_Query_Interface
 {
-    use ParametersTrait;
-
-    public function __construct(private SpanQueryInterface $query, private int $end, array $parameters = [])
+    use Parameters_Trait;
+    public function __construct(private Span_Query_Interface $query, private int $end, array $parameters = [])
     {
-        $this->setParameters($parameters);
+        $this->set_parameters($parameters);
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
         $query = [];
-        $query['match'] = $this->query->toArray();
+        $query['match'] = $this->query->to_array();
         $query['end'] = $this->end;
-        $output = $this->processArray($query);
-
-        return [$this->getType() => $output];
+        $output = $this->process_array($query);
+        return [$this->get_type() => $output];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'span_first';
     }

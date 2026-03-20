@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,24 +9,20 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace OpenSearchDSL\SearchEndpoint;
+namespace Open_Search_Dsl\Search_Endpoint;
 
 /**
  * Search sort dsl endpoint.
  */
-class SortEndpoint extends AbstractSearchEndpoint
+class Sort_Endpoint extends Abstract_Search_Endpoint
 {
     public const NAME = 'sort';
-
     public function normalize(): ?array
     {
         $output = [];
-
-        foreach ($this->getAll() as $sort) {
-            $output[] = $sort->toArray();
+        foreach ($this->get_all() as $sort) {
+            $output[] = $sort->to_array();
         }
-
         return $output;
     }
 }

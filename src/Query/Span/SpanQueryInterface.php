@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,14 +9,12 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Span;
 
-namespace OpenSearchDSL\Query\Span;
-
-use OpenSearchDSL\BuilderInterface;
-
+use Open_Search_Dsl\Builder_Interface;
 /**
  * Interface SpanQueryInterface to recognise span queries.
  */
-interface SpanQueryInterface extends BuilderInterface
+interface Span_Query_Interface extends Builder_Interface
 {
 }

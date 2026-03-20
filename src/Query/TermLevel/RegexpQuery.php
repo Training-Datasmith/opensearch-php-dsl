@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,40 +9,29 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Term_Level;
 
-namespace OpenSearchDSL\Query\TermLevel;
-
-use OpenSearchDSL\BuilderInterface;
-use OpenSearchDSL\ParametersTrait;
-
+use Open_Search_Dsl\Builder_Interface;
+use Open_Search_Dsl\Parameters_Trait;
 /**
  * Represents Elasticsearch "regexp" query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
  */
-class RegexpQuery implements BuilderInterface
+class Regexp_Query implements Builder_Interface
 {
-    use ParametersTrait;
-
-    public function __construct(private string $field, private string $regexpValue, array $parameters = [])
+    use Parameters_Trait;
+    public function __construct(private string $field, private string $regexp_value, array $parameters = [])
     {
-        $this->setParameters($parameters);
+        $this->set_parameters($parameters);
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
-        $query = [
-            'value' => $this->regexpValue,
-        ];
-
-        $output = [
-            $this->field => $this->processArray($query),
-        ];
-
-        return [$this->getType() => $output];
+        $query = ['value' => $this->regexp_value];
+        $output = [$this->field => $this->process_array($query)];
+        return [$this->get_type() => $output];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'regexp';
     }

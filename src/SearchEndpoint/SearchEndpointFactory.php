@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,28 +9,17 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace OpenSearchDSL\SearchEndpoint;
+namespace Open_Search_Dsl\Search_Endpoint;
 
 /**
  * Factory for search endpoints.
  */
-class SearchEndpointFactory
+class Search_Endpoint_Factory
 {
     /**
      * @var array holds namespaces for endpoints
      */
-    private static array $endpoints = [
-        'query' => QueryEndpoint::class,
-        'post_filter' => PostFilterEndpoint::class,
-        'sort' => SortEndpoint::class,
-        'highlight' => HighlightEndpoint::class,
-        'aggregations' => AggregationsEndpoint::class,
-        'suggest' => SuggestEndpoint::class,
-        'inner_hits' => InnerHitsEndpoint::class,
-        'collapse' => CollapseEndpoint::class,
-    ];
-
+    private static array $endpoints = ['query' => Query_Endpoint::class, 'post_filter' => Post_Filter_Endpoint::class, 'sort' => Sort_Endpoint::class, 'highlight' => Highlight_Endpoint::class, 'aggregations' => Aggregations_Endpoint::class, 'suggest' => Suggest_Endpoint::class, 'inner_hits' => Inner_Hits_Endpoint::class, 'collapse' => Collapse_Endpoint::class];
     /**
      * Returns a search endpoint instance.
      *
@@ -46,7 +34,6 @@ class SearchEndpointFactory
         if (!array_key_exists($type, self::$endpoints)) {
             throw new \RuntimeException('Endpoint does not exist.');
         }
-
         return new self::$endpoints[$type]();
     }
 }

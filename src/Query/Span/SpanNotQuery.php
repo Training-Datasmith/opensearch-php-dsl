@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,36 +9,27 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Span;
 
-namespace OpenSearchDSL\Query\Span;
-
-use OpenSearchDSL\ParametersTrait;
-
+use Open_Search_Dsl\Parameters_Trait;
 /**
  * Elasticsearch Span not query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-not-query.html
  */
-class SpanNotQuery implements SpanQueryInterface
+class Span_Not_Query implements Span_Query_Interface
 {
-    use ParametersTrait;
-
-    public function __construct(private SpanQueryInterface $include, private SpanQueryInterface $exclude, array $parameters = [])
+    use Parameters_Trait;
+    public function __construct(private Span_Query_Interface $include, private Span_Query_Interface $exclude, array $parameters = [])
     {
-        $this->setParameters($parameters);
+        $this->set_parameters($parameters);
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
-        $query = [
-            'include' => $this->include->toArray(),
-            'exclude' => $this->exclude->toArray(),
-        ];
-
-        return [$this->getType() => $this->processArray($query)];
+        $query = ['include' => $this->include->to_array(), 'exclude' => $this->exclude->to_array()];
+        return [$this->get_type() => $this->process_array($query)];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'span_not';
     }

@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,21 +9,18 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Term_Level;
 
-namespace OpenSearchDSL\Query\TermLevel;
-
-use OpenSearchDSL\BuilderInterface;
-use OpenSearchDSL\ParametersTrait;
-
+use Open_Search_Dsl\Builder_Interface;
+use Open_Search_Dsl\Parameters_Trait;
 /**
  * Represents Elasticsearch "range" query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html
  */
-class RangeQuery implements BuilderInterface
+class Range_Query implements Builder_Interface
 {
-    use ParametersTrait;
-
+    use Parameters_Trait;
     /**
      * Range control names.
      */
@@ -32,30 +28,22 @@ class RangeQuery implements BuilderInterface
     public const GT = 'gt';
     public const LTE = 'lte';
     public const GTE = 'gte';
-
     public function __construct(private string $field, array $parameters = [])
     {
-        $this->setParameters($parameters);
-
-        if ($this->hasParameter(self::GTE) && $this->hasParameter(self::GT)) {
+        $this->set_parameters($parameters);
+        if ($this->has_parameter(self::GTE) && $this->has_parameter(self::GT)) {
             throw new \LogicException('Range query cannot have "gte" and "gt" parameters');
         }
-
-        if ($this->hasParameter(self::LTE) && $this->hasParameter(self::LT)) {
+        if ($this->has_parameter(self::LTE) && $this->has_parameter(self::LT)) {
             throw new \LogicException('Range query cannot have "lte" and "lt" parameters');
         }
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
-        $output = [
-            $this->field => $this->getParameters(),
-        ];
-
-        return [$this->getType() => $output];
+        $output = [$this->field => $this->get_parameters()];
+        return [$this->get_type() => $output];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'range';
     }

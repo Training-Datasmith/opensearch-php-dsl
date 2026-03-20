@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,34 +9,28 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Aggregation\Bucketing;
 
-namespace OpenSearchDSL\Aggregation\Bucketing;
-
-use OpenSearchDSL\Aggregation\AbstractAggregation;
-use OpenSearchDSL\Aggregation\Type\BucketingTrait;
-
+use Open_Search_Dsl\Aggregation\Abstract_Aggregation;
+use Open_Search_Dsl\Aggregation\Type\Bucketing_Trait;
 /**
  * Class representing missing aggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-missing-aggregation.html
  */
-class MissingAggregation extends AbstractAggregation
+class Missing_Aggregation extends Abstract_Aggregation
 {
-    use BucketingTrait;
-
+    use Bucketing_Trait;
     public function __construct(string $name, string $field)
     {
         parent::__construct($name);
-
-        $this->setField($field);
+        $this->set_field($field);
     }
-
-    public function getArray(): array
+    public function get_array(): array
     {
-        return ['field' => $this->getField()];
+        return ['field' => $this->get_field()];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'missing';
     }

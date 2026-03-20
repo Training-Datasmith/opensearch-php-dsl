@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,8 +9,7 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace OpenSearchDSL\Query\FullText;
+namespace Open_Search_Dsl\Query\Full_Text;
 
 /**
  * Represents Elasticsearch "match_phrase_prefix" query.
@@ -20,9 +18,9 @@ namespace OpenSearchDSL\Query\FullText;
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
  */
-class MatchPhrasePrefixQuery extends MatchQuery
+class Match_Phrase_Prefix_Query extends Match_Query
 {
-    public function getType(): string
+    public function get_type(): string
     {
         return 'match_phrase_prefix';
     }

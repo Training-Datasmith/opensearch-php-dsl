@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,49 +9,39 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Search_Endpoint;
 
-namespace OpenSearchDSL\SearchEndpoint;
-
-use OpenSearchDSL\BuilderInterface;
-
+use Open_Search_Dsl\Builder_Interface;
 /**
  * Search highlight dsl endpoint.
  */
-class HighlightEndpoint extends AbstractSearchEndpoint
+class Highlight_Endpoint extends Abstract_Search_Endpoint
 {
     /**
      * Endpoint name
      */
     public const NAME = 'highlight';
-
-    private ?BuilderInterface $highlight = null;
-
+    private ?Builder_Interface $highlight = null;
     public function normalize(): ?array
     {
         if ($this->highlight) {
-            return $this->highlight->toArray();
+            return $this->highlight->to_array();
         }
-
         return null;
     }
-
-    public function add(BuilderInterface $builder, ?string $key = null): string
+    public function add(Builder_Interface $builder, ?string $key = null): string
     {
         if ($this->highlight) {
             throw new \OverflowException('Only one highlight can be set');
         }
-
         $this->highlight = $builder;
-
         return '';
     }
-
-    public function getAll(?string $boolType = null): array
+    public function get_all(?string $bool_type = null): array
     {
-        return ['' => $this->getHighlight()];
+        return ['' => $this->get_highlight()];
     }
-
-    public function getHighlight(): BuilderInterface
+    public function get_highlight(): Builder_Interface
     {
         return $this->highlight;
     }

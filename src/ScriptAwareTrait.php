@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,34 +9,30 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace OpenSearchDSL;
+namespace Open_Search_Dsl;
 
 /**
  * A trait which handles elasticsearch aggregation script.
  */
-trait ScriptAwareTrait
+trait Script_Aware_Trait
 {
     /**
      * @var string|array{id: string, params?: array<string, mixed>}|null
      */
     private $script;
-
     /**
      * @return array{id: string, params?: array<string, mixed>}|string|null
      */
-    public function getScript()
+    public function get_script()
     {
         return $this->script;
     }
-
     /**
      * @param array{id: string, params?: array<string, mixed>}|string|null $script
      */
-    public function setScript($script): self
+    public function set_script($script): self
     {
         $this->script = $script;
-
         return $this;
     }
 }

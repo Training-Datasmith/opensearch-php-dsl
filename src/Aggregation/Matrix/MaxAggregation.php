@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,93 +9,70 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Aggregation\Matrix;
 
-namespace OpenSearchDSL\Aggregation\Matrix;
-
-use OpenSearchDSL\Aggregation\AbstractAggregation;
-use OpenSearchDSL\Aggregation\Type\MetricTrait;
-
+use Open_Search_Dsl\Aggregation\Abstract_Aggregation;
+use Open_Search_Dsl\Aggregation\Type\Metric_Trait;
 /**
  * Class representing Max Aggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-max-aggregation.html
  */
-class MaxAggregation extends AbstractAggregation
+class Max_Aggregation extends Abstract_Aggregation
 {
-    use MetricTrait;
-
+    use Metric_Trait;
     private array $fields;
-
     private ?string $mode = null;
-
     private ?array $missing = null;
-
     /**
      * @param array|string $field
      */
     public function __construct(string $name, $field, ?array $missing = null, ?string $mode = null)
     {
         parent::__construct($name);
-
-        $this->setFields(is_string($field) ? [$field] : $field);
-        $this->setMode($mode);
-        $this->setMissing($missing);
+        $this->set_fields(is_string($field) ? [$field] : $field);
+        $this->set_mode($mode);
+        $this->set_missing($missing);
     }
-
-    public function getFields(): array
+    public function get_fields(): array
     {
         return $this->fields;
     }
-
-    public function setFields(array $fields): self
+    public function set_fields(array $fields): self
     {
         $this->fields = $fields;
-
         return $this;
     }
-
-    public function getMode(): ?string
+    public function get_mode(): ?string
     {
         return $this->mode;
     }
-
-    public function setMode(string $mode): self
+    public function set_mode(string $mode): self
     {
         $this->mode = $mode;
-
         return $this;
     }
-
-    public function getMissing(): ?array
+    public function get_missing(): ?array
     {
         return $this->missing;
     }
-
-    public function setMissing(?array $missing): self
+    public function set_missing(?array $missing): self
     {
         $this->missing = $missing;
-
         return $this;
     }
-
-    protected function getArray(): array
+    protected function get_array(): array
     {
-        $out = [
-            'fields' => $this->getField(),
-        ];
-
-        if ($this->getMode()) {
-            $out['mode'] = $this->getMode();
+        $out = ['fields' => $this->get_field()];
+        if ($this->get_mode()) {
+            $out['mode'] = $this->get_mode();
         }
-
-        if ($this->getMissing()) {
-            $out['missing'] = $this->getMissing();
+        if ($this->get_missing()) {
+            $out['missing'] = $this->get_missing();
         }
-
         return $out;
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'matrix_stats';
     }

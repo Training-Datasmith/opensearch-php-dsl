@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,54 +9,39 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Aggregation\Bucketing;
 
-namespace OpenSearchDSL\Aggregation\Bucketing;
-
-use OpenSearchDSL\Aggregation\AbstractAggregation;
-use OpenSearchDSL\Aggregation\Type\BucketingTrait;
-
+use Open_Search_Dsl\Aggregation\Abstract_Aggregation;
+use Open_Search_Dsl\Aggregation\Type\Bucketing_Trait;
 /**
  * Class representing geo diversified sampler aggregation.
  *
  * @see https://goo.gl/yzXvqD
  */
-class DiversifiedSamplerAggregation extends AbstractAggregation
+class Diversified_Sampler_Aggregation extends Abstract_Aggregation
 {
-    use BucketingTrait;
-
-    private ?int $shardSize;
-
-    public function __construct(string $name, string $field, ?int $shardSize = null)
+    use Bucketing_Trait;
+    private ?int $shard_size;
+    public function __construct(string $name, string $field, ?int $shard_size = null)
     {
         parent::__construct($name);
-
-        $this->setField($field);
-        $this->setShardSize($shardSize);
+        $this->set_field($field);
+        $this->set_shard_size($shard_size);
     }
-
-    public function getShardSize(): ?int
+    public function get_shard_size(): ?int
     {
-        return $this->shardSize;
+        return $this->shard_size;
     }
-
-    public function setShardSize(?int $shardSize): self
+    public function set_shard_size(?int $shard_size): self
     {
-        $this->shardSize = $shardSize;
-
+        $this->shard_size = $shard_size;
         return $this;
     }
-
-    protected function getArray(): array
+    protected function get_array(): array
     {
-        return \array_filter(
-            [
-                'field' => $this->getField(),
-                'shard_size' => $this->getShardSize(),
-            ]
-        );
+        return \array_filter(['field' => $this->get_field(), 'shard_size' => $this->get_shard_size()]);
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'diversified_sampler';
     }

@@ -1,34 +1,27 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Open_Search_Dsl\Collapse;
 
-namespace OpenSearchDSL\Collapse;
-
-use OpenSearchDSL\BuilderInterface;
-use OpenSearchDSL\ParametersTrait;
-
+use Open_Search_Dsl\Builder_Interface;
+use Open_Search_Dsl\Parameters_Trait;
 /**
  * Data holder for collapse api.
  */
-class Collapse implements BuilderInterface
+class Collapse implements Builder_Interface
 {
-    use ParametersTrait;
-
+    use Parameters_Trait;
     public function __construct(private string $field)
     {
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'collapse';
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
-        $output = $this->processArray();
-
+        $output = $this->process_array();
         $output['field'] = $this->field;
-
         return $output;
     }
 }

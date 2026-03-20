@@ -1,49 +1,39 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Open_Search_Dsl\Search_Endpoint;
 
-namespace OpenSearchDSL\SearchEndpoint;
-
-use OpenSearchDSL\BuilderInterface;
-
+use Open_Search_Dsl\Builder_Interface;
 /**
  * Search collapse dsl endpoint.
  */
-class CollapseEndpoint extends AbstractSearchEndpoint
+class Collapse_Endpoint extends Abstract_Search_Endpoint
 {
     /**
      * Endpoint name
      */
     public const NAME = 'collapse';
-
-    private ?BuilderInterface $collapse = null;
-
+    private ?Builder_Interface $collapse = null;
     public function normalize(): ?array
     {
         if ($this->collapse) {
-            return $this->collapse->toArray();
+            return $this->collapse->to_array();
         }
-
         return null;
     }
-
-    public function add(BuilderInterface $builder, ?string $key = null): string
+    public function add(Builder_Interface $builder, ?string $key = null): string
     {
         if ($this->collapse) {
             throw new \OverflowException('Only one collapse can be set');
         }
-
         $this->collapse = $builder;
-
         return '';
     }
-
-    public function getAll(?string $boolType = null): array
+    public function get_all(?string $bool_type = null): array
     {
-        return ['' => $this->getCollapse()];
+        return ['' => $this->get_collapse()];
     }
-
-    public function getCollapse(): BuilderInterface
+    public function get_collapse(): Builder_Interface
     {
         return $this->collapse;
     }

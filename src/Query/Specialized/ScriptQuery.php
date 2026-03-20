@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,35 +9,29 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Specialized;
 
-namespace OpenSearchDSL\Query\Specialized;
-
-use OpenSearchDSL\BuilderInterface;
-use OpenSearchDSL\ParametersTrait;
-
+use Open_Search_Dsl\Builder_Interface;
+use Open_Search_Dsl\Parameters_Trait;
 /**
  * Represents Elasticsearch "script" query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-query.html
  */
-class ScriptQuery implements BuilderInterface
+class Script_Query implements Builder_Interface
 {
-    use ParametersTrait;
-
+    use Parameters_Trait;
     public function __construct(private string $script, array $parameters = [])
     {
-        $this->setParameters($parameters);
+        $this->set_parameters($parameters);
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
         $query = ['source' => $this->script];
-        $output = $this->processArray($query);
-
-        return [$this->getType() => ['script' => $output]];
+        $output = $this->process_array($query);
+        return [$this->get_type() => ['script' => $output]];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'script';
     }

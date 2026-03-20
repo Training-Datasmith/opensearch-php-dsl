@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,17 +9,16 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace OpenSearchDSL\Query\Span;
+namespace Open_Search_Dsl\Query\Span;
 
 /**
  * Elasticsearch span within query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-within-query.html
  */
-class SpanWithinQuery extends SpanContainingQuery
+class Span_Within_Query extends Span_Containing_Query
 {
-    public function getType(): string
+    public function get_type(): string
     {
         return 'span_within';
     }

@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,22 +9,18 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl;
 
-namespace OpenSearchDSL;
-
-trait NameAwareTrait
+trait Name_Aware_Trait
 {
     private string $name;
-
-    public function getName(): string
+    public function get_name(): string
     {
         return $this->name;
     }
-
-    public function setName(string $name): self
+    public function set_name(string $name): self
     {
         $this->name = $name;
-
         return $this;
     }
 }

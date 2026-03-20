@@ -1,48 +1,39 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Open_Search_Dsl\Aggregation\Pipeline;
 
-namespace OpenSearchDSL\Aggregation\Pipeline;
-
-use OpenSearchDSL\Aggregation\AbstractAggregation;
-use OpenSearchDSL\Aggregation\Type\MetricTrait;
-
-abstract class AbstractPipelineAggregation extends AbstractAggregation
+use Open_Search_Dsl\Aggregation\Abstract_Aggregation;
+use Open_Search_Dsl\Aggregation\Type\Metric_Trait;
+abstract class Abstract_Pipeline_Aggregation extends Abstract_Aggregation
 {
-    use MetricTrait;
-
+    use Metric_Trait;
     /**
      * @var array|string
      */
-    private $bucketsPath;
-
-    public function __construct(string $name, $bucketsPath)
+    private $buckets_path;
+    public function __construct(string $name, $buckets_path)
     {
         parent::__construct($name);
-
-        $this->setBucketsPath($bucketsPath);
+        $this->set_buckets_path($buckets_path);
     }
-
     /**
      * @return array|string
      */
-    public function getBucketsPath()
+    public function get_buckets_path()
     {
-        return $this->bucketsPath;
+        return $this->buckets_path;
     }
-
     /**
      * @param array|string $bucketsPath
      */
-    public function setBucketsPath($bucketsPath): self
+    public function set_buckets_path($buckets_path): self
     {
-        $this->bucketsPath = $bucketsPath;
-
+        $this->buckets_path = $buckets_path;
         return $this;
     }
-
-    public function getArray()
+    public function get_array()
     {
-        return ['buckets_path' => $this->getBucketsPath()];
+        return ['buckets_path' => $this->get_buckets_path()];
     }
 }

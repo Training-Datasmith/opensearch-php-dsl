@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,95 +9,71 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Aggregation\Bucketing;
 
-namespace OpenSearchDSL\Aggregation\Bucketing;
-
-use OpenSearchDSL\Aggregation\AbstractAggregation;
-use OpenSearchDSL\Aggregation\Type\BucketingTrait;
-
+use Open_Search_Dsl\Aggregation\Abstract_Aggregation;
+use Open_Search_Dsl\Aggregation\Type\Bucketing_Trait;
 /**
  * Class representing geohash grid aggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html
  */
-class GeoHashGridAggregation extends AbstractAggregation
+class Geo_Hash_Grid_Aggregation extends Abstract_Aggregation
 {
-    use BucketingTrait;
-
+    use Bucketing_Trait;
     private ?int $precision;
-
     private ?int $size;
-
-    private ?int $shardSize;
-
-    public function __construct(string $name, string $field, ?int $precision = null, ?int $size = null, ?int $shardSize = null)
+    private ?int $shard_size;
+    public function __construct(string $name, string $field, ?int $precision = null, ?int $size = null, ?int $shard_size = null)
     {
         parent::__construct($name);
-
-        $this->setField($field);
-        $this->setPrecision($precision);
-        $this->setSize($size);
-        $this->setShardSize($shardSize);
+        $this->set_field($field);
+        $this->set_precision($precision);
+        $this->set_size($size);
+        $this->set_shard_size($shard_size);
     }
-
-    public function getPrecision(): ?int
+    public function get_precision(): ?int
     {
         return $this->precision;
     }
-
-    public function setPrecision(?int $precision): self
+    public function set_precision(?int $precision): self
     {
         $this->precision = $precision;
-
         return $this;
     }
-
-    public function getSize(): ?int
+    public function get_size(): ?int
     {
         return $this->size;
     }
-
-    public function setSize(?int $size): self
+    public function set_size(?int $size): self
     {
         $this->size = $size;
-
         return $this;
     }
-
-    public function getShardSize(): ?int
+    public function get_shard_size(): ?int
     {
-        return $this->shardSize;
+        return $this->shard_size;
     }
-
-    public function setShardSize(?int $shardSize): self
+    public function set_shard_size(?int $shard_size): self
     {
-        $this->shardSize = $shardSize;
-
+        $this->shard_size = $shard_size;
         return $this;
     }
-
-    public function getArray(): array
+    public function get_array(): array
     {
-        $data = [
-            'field' => $this->getField(),
-        ];
-
-        if ($this->getPrecision()) {
-            $data['precision'] = $this->getPrecision();
+        $data = ['field' => $this->get_field()];
+        if ($this->get_precision()) {
+            $data['precision'] = $this->get_precision();
         }
-
-        if ($this->getSize()) {
-            $data['size'] = $this->getSize();
+        if ($this->get_size()) {
+            $data['size'] = $this->get_size();
         }
-
-        if ($this->getShardSize()) {
-            $data['shard_size'] = $this->getShardSize();
+        if ($this->get_shard_size()) {
+            $data['shard_size'] = $this->get_shard_size();
         }
-
         return $data;
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'geohash_grid';
     }

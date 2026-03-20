@@ -1,47 +1,36 @@
 <?php
 
-declare(strict_types=1);
-
-namespace OpenSearchDSL\Type;
+declare (strict_types=1);
+namespace Open_Search_Dsl\Type;
 
 /**
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html
  */
-class Location implements TypeInterface
+class Location implements Type_Interface
 {
     public function __construct(private float $lat, private float $lon)
     {
     }
-
-    public function getLat(): float
+    public function get_lat(): float
     {
         return $this->lat;
     }
-
-    public function setLat(float $lat): self
+    public function set_lat(float $lat): self
     {
         $this->lat = $lat;
-
         return $this;
     }
-
-    public function getLon(): float
+    public function get_lon(): float
     {
         return $this->lon;
     }
-
-    public function setLon(float $lon): self
+    public function set_lon(float $lon): self
     {
         $this->lon = $lon;
-
         return $this;
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
-        return [
-            'lat' => $this->getLat(),
-            'lon' => $this->getLon(),
-        ];
+        return ['lat' => $this->get_lat(), 'lon' => $this->get_lon()];
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,105 +9,71 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Aggregation\Metric;
 
-namespace OpenSearchDSL\Aggregation\Metric;
-
-use OpenSearchDSL\Aggregation\AbstractAggregation;
-use OpenSearchDSL\Aggregation\Type\MetricTrait;
-
+use Open_Search_Dsl\Aggregation\Abstract_Aggregation;
+use Open_Search_Dsl\Aggregation\Type\Metric_Trait;
 /**
  * Class representing ScriptedMetricAggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html
  */
-class ScriptedMetricAggregation extends AbstractAggregation
+class Scripted_Metric_Aggregation extends Abstract_Aggregation
 {
-    use MetricTrait;
-
-    private ?string $initScript;
-
-    private ?string $mapScript;
-
-    private ?string $combineScript;
-
-    private ?string $reduceScript;
-
-    public function __construct(
-        string $name,
-        ?string $initScript = null,
-        ?string $mapScript = null,
-        ?string $combineScript = null,
-        ?string $reduceScript = null,
-    ) {
+    use Metric_Trait;
+    private ?string $init_script;
+    private ?string $map_script;
+    private ?string $combine_script;
+    private ?string $reduce_script;
+    public function __construct(string $name, ?string $init_script = null, ?string $map_script = null, ?string $combine_script = null, ?string $reduce_script = null)
+    {
         parent::__construct($name);
-
-        $this->setInitScript($initScript);
-        $this->setMapScript($mapScript);
-        $this->setCombineScript($combineScript);
-        $this->setReduceScript($reduceScript);
+        $this->set_init_script($init_script);
+        $this->set_map_script($map_script);
+        $this->set_combine_script($combine_script);
+        $this->set_reduce_script($reduce_script);
     }
-
-    public function getInitScript(): ?string
+    public function get_init_script(): ?string
     {
-        return $this->initScript;
+        return $this->init_script;
     }
-
-    public function setInitScript(?string $initScript): self
+    public function set_init_script(?string $init_script): self
     {
-        $this->initScript = $initScript;
-
+        $this->init_script = $init_script;
         return $this;
     }
-
-    public function getMapScript(): ?string
+    public function get_map_script(): ?string
     {
-        return $this->mapScript;
+        return $this->map_script;
     }
-
-    public function setMapScript(?string $mapScript): self
+    public function set_map_script(?string $map_script): self
     {
-        $this->mapScript = $mapScript;
-
+        $this->map_script = $map_script;
         return $this;
     }
-
-    public function getCombineScript(): ?string
+    public function get_combine_script(): ?string
     {
-        return $this->combineScript;
+        return $this->combine_script;
     }
-
-    public function setCombineScript(?string $combineScript): self
+    public function set_combine_script(?string $combine_script): self
     {
-        $this->combineScript = $combineScript;
-
+        $this->combine_script = $combine_script;
         return $this;
     }
-
-    public function getReduceScript(): ?string
+    public function get_reduce_script(): ?string
     {
-        return $this->reduceScript;
+        return $this->reduce_script;
     }
-
-    public function setReduceScript(?string $reduceScript): self
+    public function set_reduce_script(?string $reduce_script): self
     {
-        $this->reduceScript = $reduceScript;
-
+        $this->reduce_script = $reduce_script;
         return $this;
     }
-
-    public function getArray(): array
+    public function get_array(): array
     {
-        return array_filter(
-            [
-                'init_script' => $this->getInitScript(),
-                'map_script' => $this->getMapScript(),
-                'combine_script' => $this->getCombineScript(),
-                'reduce_script' => $this->getReduceScript(),
-            ]
-        );
+        return array_filter(['init_script' => $this->get_init_script(), 'map_script' => $this->get_map_script(), 'combine_script' => $this->get_combine_script(), 'reduce_script' => $this->get_reduce_script()]);
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'scripted_metric';
     }

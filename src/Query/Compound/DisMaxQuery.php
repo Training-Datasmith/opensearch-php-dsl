@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,50 +9,41 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Compound;
 
-namespace OpenSearchDSL\Query\Compound;
-
-use OpenSearchDSL\BuilderInterface;
-use OpenSearchDSL\ParametersTrait;
-
+use Open_Search_Dsl\Builder_Interface;
+use Open_Search_Dsl\Parameters_Trait;
 /**
  * Represents Elasticsearch "dis_max" query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html
  */
-class DisMaxQuery implements BuilderInterface
+class Dis_Max_Query implements Builder_Interface
 {
-    use ParametersTrait;
-
+    use Parameters_Trait;
     /**
      * @var BuilderInterface[]
      */
     private array $queries = [];
-
     public function __construct(array $parameters = [])
     {
-        $this->setParameters($parameters);
+        $this->set_parameters($parameters);
     }
-
-    public function addQuery(BuilderInterface $query): self
+    public function add_query(Builder_Interface $query): self
     {
         $this->queries[] = $query;
-
         return $this;
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
         $query = [];
         foreach ($this->queries as $type) {
-            $query[] = $type->toArray();
+            $query[] = $type->to_array();
         }
-        $output = $this->processArray(['queries' => $query]);
-
-        return [$this->getType() => $output];
+        $output = $this->process_array(['queries' => $query]);
+        return [$this->get_type() => $output];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'dis_max';
     }

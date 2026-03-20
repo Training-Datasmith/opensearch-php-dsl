@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,36 +9,30 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Geo;
 
-namespace OpenSearchDSL\Query\Geo;
-
-use OpenSearchDSL\BuilderInterface;
-use OpenSearchDSL\ParametersTrait;
-
+use Open_Search_Dsl\Builder_Interface;
+use Open_Search_Dsl\Parameters_Trait;
 /**
  * Represents Elasticsearch "geo_polygon" query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-query.html
  */
-class GeoPolygonQuery implements BuilderInterface
+class Geo_Polygon_Query implements Builder_Interface
 {
-    use ParametersTrait;
-
+    use Parameters_Trait;
     public function __construct(private string $field, private array $points = [], array $parameters = [])
     {
-        $this->setParameters($parameters);
+        $this->set_parameters($parameters);
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'geo_polygon';
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
         $query = [$this->field => ['points' => $this->points]];
-        $output = $this->processArray($query);
-
-        return [$this->getType() => $output];
+        $output = $this->process_array($query);
+        return [$this->get_type() => $output];
     }
 }

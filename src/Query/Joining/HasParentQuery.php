@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,39 +9,29 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Joining;
 
-namespace OpenSearchDSL\Query\Joining;
-
-use OpenSearchDSL\BuilderInterface;
-use OpenSearchDSL\ParametersTrait;
-
+use Open_Search_Dsl\Builder_Interface;
+use Open_Search_Dsl\Parameters_Trait;
 /**
  * Represents Elasticsearch "has_parent" query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html
  */
-class HasParentQuery implements BuilderInterface
+class Has_Parent_Query implements Builder_Interface
 {
-    use ParametersTrait;
-
-    public function __construct(private string $parentType, private BuilderInterface $query, array $parameters = [])
+    use Parameters_Trait;
+    public function __construct(private string $parent_type, private Builder_Interface $query, array $parameters = [])
     {
-        $this->setParameters($parameters);
+        $this->set_parameters($parameters);
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
-        $query = [
-            'parent_type' => $this->parentType,
-            'query' => $this->query->toArray(),
-        ];
-
-        $output = $this->processArray($query);
-
-        return [$this->getType() => $output];
+        $query = ['parent_type' => $this->parent_type, 'query' => $this->query->to_array()];
+        $output = $this->process_array($query);
+        return [$this->get_type() => $output];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'has_parent';
     }

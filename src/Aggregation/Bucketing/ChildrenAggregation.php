@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,52 +9,41 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Aggregation\Bucketing;
 
-namespace OpenSearchDSL\Aggregation\Bucketing;
-
-use OpenSearchDSL\Aggregation\AbstractAggregation;
-use OpenSearchDSL\Aggregation\Type\BucketingTrait;
-
+use Open_Search_Dsl\Aggregation\Abstract_Aggregation;
+use Open_Search_Dsl\Aggregation\Type\Bucketing_Trait;
 /**
  * Class representing ChildrenAggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-children-aggregation.html
  */
-class ChildrenAggregation extends AbstractAggregation
+class Children_Aggregation extends Abstract_Aggregation
 {
-    use BucketingTrait;
-
+    use Bucketing_Trait;
     private string $children;
-
     public function __construct(string $name, string $children)
     {
         parent::__construct($name);
-
-        $this->setChildren($children);
+        $this->set_children($children);
     }
-
-    public function getChildren(): string
+    public function get_children(): string
     {
         return $this->children;
     }
-
-    public function setChildren(string $children): self
+    public function set_children(string $children): self
     {
         $this->children = $children;
-
         return $this;
     }
-
-    public function getArray(): array
+    public function get_array(): array
     {
-        if (count($this->getAggregations()) === 0) {
-            throw new \LogicException("Children aggregation `{$this->getName()}` has no aggregations added");
+        if (count($this->get_aggregations()) === 0) {
+            throw new \LogicException("Children aggregation `{$this->get_name()}` has no aggregations added");
         }
-
-        return ['type' => $this->getChildren()];
+        return ['type' => $this->get_children()];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'children';
     }

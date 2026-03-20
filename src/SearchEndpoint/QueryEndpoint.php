@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,69 +9,56 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Search_Endpoint;
 
-namespace OpenSearchDSL\SearchEndpoint;
-
-use OpenSearchDSL\BuilderInterface;
-use OpenSearchDSL\Query\Compound\BoolQuery;
-
+use Open_Search_Dsl\Builder_Interface;
+use Open_Search_Dsl\Query\Compound\Bool_Query;
 /**
  * Search query dsl endpoint.
  */
-class QueryEndpoint extends AbstractSearchEndpoint
+class Query_Endpoint extends Abstract_Search_Endpoint
 {
     /**
      * Endpoint name
      */
     public const NAME = 'query';
     private const DEFAULT_ORDER = 2;
-
-    private ?BoolQuery $bool = null;
-
-    private bool $filtersSet = false;
-
+    private ?Bool_Query $bool = null;
+    private bool $filters_set = false;
     public function normalize(): ?array
     {
-        if (!$this->filtersSet && $this->hasReference('filter_query')) {
+        if (!$this->filters_set && $this->has_reference('filter_query')) {
             /** @var BuilderInterface $filter */
-            $filter = $this->getReference('filter_query');
-            $this->addToBool($filter, BoolQuery::FILTER);
-            $this->filtersSet = true;
+            $filter = $this->get_reference('filter_query');
+            $this->add_to_bool($filter, Bool_Query::FILTER);
+            $this->filters_set = true;
         }
-
         if (!$this->bool) {
             return null;
         }
-
-        return $this->bool->toArray();
+        return $this->bool->to_array();
     }
-
-    public function add(BuilderInterface $builder, ?string $key = null): string
+    public function add(Builder_Interface $builder, ?string $key = null): string
     {
-        return $this->addToBool($builder, BoolQuery::MUST, $key);
+        return $this->add_to_bool($builder, Bool_Query::MUST, $key);
     }
-
-    public function addToBool(BuilderInterface $builder, ?string $boolType = null, $key = null): string
+    public function add_to_bool(Builder_Interface $builder, ?string $bool_type = null, $key = null): string
     {
         if (!$this->bool) {
-            $this->bool = new BoolQuery();
+            $this->bool = new Bool_Query();
         }
-
-        return $this->bool->add($builder, $boolType, $key);
+        return $this->bool->add($builder, $bool_type, $key);
     }
-
-    public function getOrder(): int
+    public function get_order(): int
     {
         return self::DEFAULT_ORDER;
     }
-
-    public function getBool(): ?\OpenSearchDSL\Query\Compound\BoolQuery
+    public function get_bool(): ?\Open_Search_Dsl\Query\Compound\Bool_Query
     {
         return $this->bool;
     }
-
-    public function getAll(?string $boolType = null): array
+    public function get_all(?string $bool_type = null): array
     {
-        return $this->bool->getQueries($boolType);
+        return $this->bool->get_queries($bool_type);
     }
 }

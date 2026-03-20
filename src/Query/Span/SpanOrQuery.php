@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,52 +9,43 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Span;
 
-namespace OpenSearchDSL\Query\Span;
-
-use OpenSearchDSL\ParametersTrait;
-
+use Open_Search_Dsl\Parameters_Trait;
 /**
  * Elasticsearch span or query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-or-query.html
  */
-class SpanOrQuery implements SpanQueryInterface
+class Span_Or_Query implements Span_Query_Interface
 {
-    use ParametersTrait;
-
+    use Parameters_Trait;
     public function __construct(private array $queries, array $parameters = [])
     {
-        $this->setParameters($parameters);
+        $this->set_parameters($parameters);
     }
-
-    public function addQuery(SpanQueryInterface $query): self
+    public function add_query(Span_Query_Interface $query): self
     {
         $this->queries[] = $query;
-
         return $this;
     }
-
     /**
      * @return SpanQueryInterface[]
      */
-    public function getQueries(): array
+    public function get_queries(): array
     {
         return $this->queries;
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
         $query = [];
         foreach ($this->queries as $type) {
-            $query['clauses'][] = $type->toArray();
+            $query['clauses'][] = $type->to_array();
         }
-        $output = $this->processArray($query);
-
-        return [$this->getType() => $output];
+        $output = $this->process_array($query);
+        return [$this->get_type() => $output];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'span_or';
     }

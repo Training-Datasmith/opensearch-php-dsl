@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,34 +9,25 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Compound;
 
-namespace OpenSearchDSL\Query\Compound;
-
-use OpenSearchDSL\BuilderInterface;
-
+use Open_Search_Dsl\Builder_Interface;
 /**
  * Represents Elasticsearch "boosting" query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html
  */
-class BoostingQuery implements BuilderInterface
+class Boosting_Query implements Builder_Interface
 {
-    public function __construct(private BuilderInterface $positive, private BuilderInterface $negative, private float $negativeBoost)
+    public function __construct(private Builder_Interface $positive, private Builder_Interface $negative, private float $negative_boost)
     {
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
-        $query = [
-            'positive' => $this->positive->toArray(),
-            'negative' => $this->negative->toArray(),
-            'negative_boost' => $this->negativeBoost,
-        ];
-
-        return [$this->getType() => $query];
+        $query = ['positive' => $this->positive->to_array(), 'negative' => $this->negative->to_array(), 'negative_boost' => $this->negative_boost];
+        return [$this->get_type() => $query];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'boosting';
     }

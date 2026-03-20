@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,68 +9,54 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Aggregation\Bucketing;
 
-namespace OpenSearchDSL\Aggregation\Bucketing;
-
-use OpenSearchDSL\Aggregation\AbstractAggregation;
-use OpenSearchDSL\Aggregation\Type\BucketingTrait;
-use OpenSearchDSL\BuilderInterface;
-
+use Open_Search_Dsl\Aggregation\Abstract_Aggregation;
+use Open_Search_Dsl\Aggregation\Type\Bucketing_Trait;
+use Open_Search_Dsl\Builder_Interface;
 /**
  * Class representing filters aggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html
  */
-class FiltersAggregation extends AbstractAggregation
+class Filters_Aggregation extends Abstract_Aggregation
 {
-    use BucketingTrait;
-
+    use Bucketing_Trait;
     /**
      * @var BuilderInterface[]
      */
     private array $filters = [];
-
     private bool $anonymous = false;
-
     public function __construct(string $name, array $filters = [], bool $anonymous = false)
     {
         parent::__construct($name);
-
-        $this->setAnonymous($anonymous);
-
-        foreach ($filters as $filterName => $filter) {
-            $anonymous ? $this->addFilter($filter) : $this->addFilter($filter, $filterName);
+        $this->set_anonymous($anonymous);
+        foreach ($filters as $filter_name => $filter) {
+            $anonymous ? $this->add_filter($filter) : $this->add_filter($filter, $filter_name);
         }
     }
-
-    public function setAnonymous(bool $anonymous): self
+    public function set_anonymous(bool $anonymous): self
     {
         $this->anonymous = $anonymous;
-
         return $this;
     }
-
-    public function addFilter(BuilderInterface $filter, string $name = ''): self
+    public function add_filter(Builder_Interface $filter, string $name = ''): self
     {
         if (!$this->anonymous && !$name) {
             throw new \LogicException('In not anonymous filters, filter name must be set.');
         }
-
         if (!$this->anonymous && $name) {
-            $this->filters['filters'][$name] = $filter->toArray();
+            $this->filters['filters'][$name] = $filter->to_array();
         } else {
-            $this->filters['filters'][] = $filter->toArray();
+            $this->filters['filters'][] = $filter->to_array();
         }
-
         return $this;
     }
-
-    public function getArray(): array
+    public function get_array(): array
     {
         return $this->filters;
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'filters';
     }

@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,50 +9,41 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Aggregation\Metric;
 
-namespace OpenSearchDSL\Aggregation\Metric;
-
-use OpenSearchDSL\Aggregation\AbstractAggregation;
-use OpenSearchDSL\Aggregation\Type\MetricTrait;
-use OpenSearchDSL\ScriptAwareTrait;
-
+use Open_Search_Dsl\Aggregation\Abstract_Aggregation;
+use Open_Search_Dsl\Aggregation\Type\Metric_Trait;
+use Open_Search_Dsl\Script_Aware_Trait;
 /**
  * Class representing StatsAggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html
  */
-class StatsAggregation extends AbstractAggregation
+class Stats_Aggregation extends Abstract_Aggregation
 {
-    use MetricTrait;
-    use ScriptAwareTrait;
-
+    use Metric_Trait;
+    use Script_Aware_Trait;
     /**
      * @param string|array{id: string, params?: array<string, mixed>}|null $script
      */
     public function __construct(string $name, ?string $field = null, $script = null)
     {
         parent::__construct($name);
-
-        $this->setField($field);
-        $this->setScript($script);
+        $this->set_field($field);
+        $this->set_script($script);
     }
-
-    public function getArray(): array
+    public function get_array(): array
     {
         $out = [];
-
-        if ($this->getField()) {
-            $out['field'] = $this->getField();
+        if ($this->get_field()) {
+            $out['field'] = $this->get_field();
         }
-
-        if ($this->getScript()) {
-            $out['script'] = $this->getScript();
+        if ($this->get_script()) {
+            $out['script'] = $this->get_script();
         }
-
         return $out;
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'stats';
     }

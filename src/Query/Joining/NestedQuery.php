@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,49 +9,35 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Joining;
 
-namespace OpenSearchDSL\Query\Joining;
-
-use OpenSearchDSL\BuilderInterface;
-use OpenSearchDSL\ParametersTrait;
-
+use Open_Search_Dsl\Builder_Interface;
+use Open_Search_Dsl\Parameters_Trait;
 /**
  * Represents Elasticsearch "nested" query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
  */
-class NestedQuery implements BuilderInterface
+class Nested_Query implements Builder_Interface
 {
-    use ParametersTrait;
-
-    public function __construct(private string $path, private BuilderInterface $query, array $parameters = [])
+    use Parameters_Trait;
+    public function __construct(private string $path, private Builder_Interface $query, array $parameters = [])
     {
         $this->parameters = $parameters;
     }
-
-    public function getQuery(): BuilderInterface
+    public function get_query(): Builder_Interface
     {
         return $this->query;
     }
-
-    public function getPath(): string
+    public function get_path(): string
     {
         return $this->path;
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
-        return [
-            $this->getType() => $this->processArray(
-                [
-                    'path' => $this->getPath(),
-                    'query' => $this->getQuery()->toArray(),
-                ]
-            ),
-        ];
+        return [$this->get_type() => $this->process_array(['path' => $this->get_path(), 'query' => $this->get_query()->to_array()])];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'nested';
     }

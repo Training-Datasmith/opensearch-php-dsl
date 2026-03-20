@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,12 +9,10 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Query\Full_Text;
 
-namespace OpenSearchDSL\Query\FullText;
-
-use OpenSearchDSL\BuilderInterface;
-use OpenSearchDSL\ParametersTrait;
-
+use Open_Search_Dsl\Builder_Interface;
+use Open_Search_Dsl\Parameters_Trait;
 /**
  * Represents Elasticsearch "multi_match" query.
  *
@@ -27,33 +24,26 @@ use OpenSearchDSL\ParametersTrait;
  * which in turn defaults to `*`. `*` extracts all fields in the mapping that are eligible to term queries and filters
  * the metadata fields. All extracted fields are then combined to build a query.
  */
-class MultiMatchQuery implements BuilderInterface
+class Multi_Match_Query implements Builder_Interface
 {
-    use ParametersTrait;
-
+    use Parameters_Trait;
     /**
      * @param string|int|float $query
      */
     public function __construct(private array $fields, private $query, array $parameters = [])
     {
-        $this->setParameters($parameters);
+        $this->set_parameters($parameters);
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
-        $query = [
-            'query' => $this->query,
-        ];
+        $query = ['query' => $this->query];
         if (count($this->fields)) {
             $query['fields'] = $this->fields;
         }
-
-        $output = $this->processArray($query);
-
-        return [$this->getType() => $output];
+        $output = $this->process_array($query);
+        return [$this->get_type() => $output];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'multi_match';
     }

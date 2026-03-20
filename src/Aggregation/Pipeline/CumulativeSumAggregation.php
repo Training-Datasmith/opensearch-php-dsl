@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,17 +9,16 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace OpenSearchDSL\Aggregation\Pipeline;
+namespace Open_Search_Dsl\Aggregation\Pipeline;
 
 /**
  * Class representing Cumulative Sum Pipeline Aggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-cumulative-sum-aggregation.html
  */
-class CumulativeSumAggregation extends AbstractPipelineAggregation
+class Cumulative_Sum_Aggregation extends Abstract_Pipeline_Aggregation
 {
-    public function getType(): string
+    public function get_type(): string
     {
         return 'cumulative_sum';
     }

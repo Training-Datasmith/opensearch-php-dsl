@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,46 +9,34 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Aggregation\Bucketing;
 
-namespace OpenSearchDSL\Aggregation\Bucketing;
-
-use OpenSearchDSL\Aggregation\AbstractAggregation;
-use OpenSearchDSL\Aggregation\Type\BucketingTrait;
-
+use Open_Search_Dsl\Aggregation\Abstract_Aggregation;
+use Open_Search_Dsl\Aggregation\Type\Bucketing_Trait;
 /**
  * Class representing AutoDateHistogramAggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-autodatehistogram-aggregation.html
  */
-class AutoDateHistogramAggregation extends AbstractAggregation
+class Auto_Date_Histogram_Aggregation extends Abstract_Aggregation
 {
-    use BucketingTrait;
-
+    use Bucketing_Trait;
     public function __construct(string $name, string $field, ?int $buckets = null, ?string $format = null)
     {
         parent::__construct($name);
-
-        $this->setField($field);
-
+        $this->set_field($field);
         if ($buckets) {
-            $this->addParameter('buckets', $buckets);
+            $this->add_parameter('buckets', $buckets);
         }
-
         if ($format) {
-            $this->addParameter('format', $format);
+            $this->add_parameter('format', $format);
         }
     }
-
-    public function getArray(): array
+    public function get_array(): array
     {
-        return array_filter(
-            [
-                'field' => $this->getField(),
-            ]
-        );
+        return array_filter(['field' => $this->get_field()]);
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'auto_date_histogram';
     }

@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,104 +9,76 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Open_Search_Dsl\Aggregation\Bucketing;
 
-namespace OpenSearchDSL\Aggregation\Bucketing;
-
-use OpenSearchDSL\Aggregation\AbstractAggregation;
-use OpenSearchDSL\Aggregation\Type\BucketingTrait;
-
+use Open_Search_Dsl\Aggregation\Abstract_Aggregation;
+use Open_Search_Dsl\Aggregation\Type\Bucketing_Trait;
 /**
  * Class representing composite aggregation.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-composite-aggregation.html
  */
-class CompositeAggregation extends AbstractAggregation
+class Composite_Aggregation extends Abstract_Aggregation
 {
-    use BucketingTrait;
-
+    use Bucketing_Trait;
     private array $sources = [];
-
     private ?int $size = null;
-
     private array $after = [];
-
     /**
      * @param AbstractAggregation[] $sources
      */
     public function __construct(string $name, array $sources = [])
     {
         parent::__construct($name);
-
         foreach ($sources as $agg) {
-            $this->addSource($agg);
+            $this->add_source($agg);
         }
     }
-
-    public function addSource(AbstractAggregation $agg): self
+    public function add_source(Abstract_Aggregation $agg): self
     {
-        $array = $agg->processArray($agg->getArray());
-
-        $this->sources[] = [
-            $agg->getName() => [$agg->getType() => $array],
-        ];
-
+        $array = $agg->process_array($agg->get_array());
+        $this->sources[] = [$agg->get_name() => [$agg->get_type() => $array]];
         return $this;
     }
-
-    public function getSources(): array
+    public function get_sources(): array
     {
         return $this->sources;
     }
-
-    public function setSources(array $sources): self
+    public function set_sources(array $sources): self
     {
         $this->sources = $sources;
-
         return $this;
     }
-
-    public function setSize(?int $size): self
+    public function set_size(?int $size): self
     {
         $this->size = $size;
-
         return $this;
     }
-
-    public function getSize(): ?int
+    public function get_size(): ?int
     {
         return $this->size;
     }
-
-    public function setAfter(array $after): self
+    public function set_after(array $after): self
     {
         $this->after = $after;
-
         return $this;
     }
-
-    public function getAfter(): array
+    public function get_after(): array
     {
         return $this->after;
     }
-
-    public function getArray(): array
+    public function get_array(): array
     {
-        $array = [
-            'sources' => $this->sources,
-        ];
-
+        $array = ['sources' => $this->sources];
         if ($this->size !== null) {
             $array['size'] = $this->size;
         }
-
         if (!empty($this->after)) {
             $array['after'] = $this->after;
         }
-
         return $array;
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'composite';
     }

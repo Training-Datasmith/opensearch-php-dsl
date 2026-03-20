@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,69 +9,58 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace OpenSearchDSL;
+namespace Open_Search_Dsl;
 
 /**
  * A trait which handles the behavior of parameters in queries, filters, etc.
  */
-trait ParametersTrait
+trait Parameters_Trait
 {
     private array $parameters = [];
-
-    public function hasParameter(string $name): bool
+    public function has_parameter(string $name): bool
     {
         return isset($this->parameters[$name]);
     }
-
     /**
      * @return static
      */
-    public function removeParameter(string $name)
+    public function remove_parameter(string $name)
     {
-        if ($this->hasParameter($name)) {
+        if ($this->has_parameter($name)) {
             unset($this->parameters[$name]);
         }
-
         return $this;
     }
-
     /**
      * @return array|string|int|float|bool|\stdClass
      */
-    public function getParameter(string $name)
+    public function get_parameter(string $name)
     {
         return $this->parameters[$name];
     }
-
-    public function getParameters(): array
+    public function get_parameters(): array
     {
         return $this->parameters;
     }
-
     /**
      * @param array|string|int|float|bool|\stdClass|object $value
      *
      * @return static
      */
-    public function addParameter(string $name, $value)
+    public function add_parameter(string $name, $value)
     {
         $this->parameters[$name] = $value;
-
         return $this;
     }
-
     /**
      * @return static
      */
-    public function setParameters(array $parameters)
+    public function set_parameters(array $parameters)
     {
         $this->parameters = $parameters;
-
         return $this;
     }
-
-    protected function processArray(array $array = []): array
+    protected function process_array(array $array = []): array
     {
         return array_merge($array, $this->parameters);
     }

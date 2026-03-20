@@ -1,10 +1,9 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Open_Search_Dsl\Type;
 
-namespace OpenSearchDSL\Type;
-
-interface TypeInterface
+interface Type_Interface
 {
-    public function toArray(): array;
+    public function to_array(): array;
 }

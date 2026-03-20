@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the ONGR package.
  *
@@ -10,51 +9,41 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace OpenSearchDSL\Query\Span;
+namespace Open_Search_Dsl\Query\Span;
 
 /**
  * Elasticsearch span near query.
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-near-query.html
  */
-class SpanNearQuery extends SpanOrQuery implements SpanQueryInterface
+class Span_Near_Query extends Span_Or_Query implements Span_Query_Interface
 {
     public function __construct(private ?int $slop = null, array $queries = [], array $parameters = [])
     {
         parent::__construct($queries, $parameters);
     }
-
-    public function getSlop(): ?int
+    public function get_slop(): ?int
     {
         return $this->slop;
     }
-
-    public function setSlop(?int $slop): self
+    public function set_slop(?int $slop): self
     {
         $this->slop = $slop;
-
         return $this;
     }
-
-    public function toArray(): array
+    public function to_array(): array
     {
         $query = [];
-
-        foreach ($this->getQueries() as $type) {
-            $query['clauses'][] = $type->toArray();
+        foreach ($this->get_queries() as $type) {
+            $query['clauses'][] = $type->to_array();
         }
-
-        if ($this->getSlop()) {
-            $query['slop'] = $this->getSlop();
+        if ($this->get_slop()) {
+            $query['slop'] = $this->get_slop();
         }
-
-        $output = $this->processArray($query);
-
-        return [$this->getType() => $output];
+        $output = $this->process_array($query);
+        return [$this->get_type() => $output];
     }
-
-    public function getType(): string
+    public function get_type(): string
     {
         return 'span_near';
     }
